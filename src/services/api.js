@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// Use Render backend in production, localhost in development
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://anomback.onrender.com/api';
+
 const api = axios.create({
-    baseURL: 'http://localhost:8080/api',
+    baseURL: API_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
     },
