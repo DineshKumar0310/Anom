@@ -11,8 +11,8 @@ const SUGGESTED_TAGS = ['placements', 'exams', 'projects', 'internships', 'gener
 // 2. Go to Settings > Upload > Upload presets > Add upload preset
 // 3. Set "Signing Mode" to "Unsigned" and save name (e.g., 'anonboard_uploads')
 // 4. Copy your Cloud Name from Dashboard
-const CLOUDINARY_UPLOAD_PRESET = 'anonboard_demo'; // REPLACE THIS with your preset name
-const CLOUDINARY_CLOUD_NAME = 'demo'; // REPLACE THIS with your cloud name
+const CLOUDINARY_UPLOAD_PRESET = 'anon_app';
+const CLOUDINARY_CLOUD_NAME = 'db9x98eaz';
 
 export default function CreatePostPage() {
     const [title, setTitle] = useState('');
