@@ -6,6 +6,14 @@ import { useToast } from '../components/Toast';
 
 const SUGGESTED_TAGS = ['placements', 'exams', 'projects', 'internships', 'general', 'dsa', 'interview', 'tips', 'help'];
 
+// --- FREE CLOUD STORAGE CONFIGURATION ---
+// 1. Create a free account at https://cloudinary.com
+// 2. Go to Settings > Upload > Upload presets > Add upload preset
+// 3. Set "Signing Mode" to "Unsigned" and save name (e.g., 'anonboard_uploads')
+// 4. Copy your Cloud Name from Dashboard
+const CLOUDINARY_UPLOAD_PRESET = 'anonboard_demo'; // REPLACE THIS with your preset name
+const CLOUDINARY_CLOUD_NAME = 'demo'; // REPLACE THIS with your cloud name
+
 export default function CreatePostPage() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -54,6 +62,32 @@ export default function CreatePostPage() {
         }
     };
 
+    const uploadToCloudinary = async (file) => {
+        if (!CLOUDINARY_UPLOAD_PRESET || !CLOUDINARY_CLOUD_NAME || CLOUDINARY_CLOUD_NAME === 'demo') {
+            console.warn("Cloudinary not configured. Please set constants in CreatePostPage.jsx");
+            return null; // Fallback to backend handling (which likely won't work on free hosting without env vars)
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+        try {
+            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!res.ok) throw new Error('Cloud upload failed');
+
+            const data = await res.json();
+            return data.secure_url;
+        } catch (err) {
+            console.error("Image upload failed", err);
+            throw new Error('Image upload failed. Please try again or check configuration.');
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -76,9 +110,23 @@ export default function CreatePostPage() {
         setLoading(true);
 
         try {
-            const formData = new FormData();
-            formData.append('post', JSON.stringify({ title, content, tags }));
+            let imageUrl = null;
             if (image) {
+                // Try sending to Cloudinary first
+                imageUrl = await uploadToCloudinary(image);
+            }
+
+            const formData = new FormData();
+            // We pass imageUrl in the JSON. If Cloudinary failed/skipped, imageUrl is null
+            // and we can still append the file as fallback if needed, but for "JSON URL" requirement,
+            // we rely on the URL.
+
+            const postData = { title, content, tags, imageUrl };
+            formData.append('post', JSON.stringify(postData));
+
+            // IF we failed to get a URL (e.g. user didn't config cloudinary), 
+            // we attach the file so the backend can TRY to handle it (if configured there)
+            if (image && !imageUrl) {
                 formData.append('image', image);
             }
 
@@ -87,7 +135,8 @@ export default function CreatePostPage() {
             showToast('Post created successfully!');
             navigate(`/post/${response.data.data.id}`);
         } catch (err) {
-            const message = err.response?.data?.error?.message || 'Failed to create post';
+            console.error(err);
+            const message = err.response?.data?.error?.message || err.message || 'Failed to create post';
             setError(message);
             showToast(message, 'error');
         } finally {
