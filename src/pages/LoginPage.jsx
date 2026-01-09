@@ -62,24 +62,7 @@ export default function LoginPage() {
                     }}>
                         {error.includes('banned') && <div style={{ fontWeight: '600', marginBottom: '4px' }}>🚫 Account Banned</div>}
                         {error}
-                        {error.includes('verified') && (
-                            <div style={{ marginTop: '8px' }}>
-                                <button
-                                    onClick={() => navigate('/verify-email', { state: { email } })}
-                                    style={{
-                                        background: 'transparent',
-                                        border: '1px solid var(--accent)',
-                                        color: 'var(--accent)',
-                                        padding: '4px 8px',
-                                        borderRadius: '4px',
-                                        cursor: 'pointer',
-                                        fontSize: '0.9rem'
-                                    }}
-                                >
-                                    Verify Email Now
-                                </button>
-                            </div>
-                        )}
+
                     </div>
                 )}
 

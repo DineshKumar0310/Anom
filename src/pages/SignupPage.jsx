@@ -66,9 +66,10 @@ export default function SignupPage() {
         setLoading(true);
 
         try {
-            await register(email, password, selectedAvatar);
-            showToast('Verification code sent to your email!');
-            navigate('/verify-email', { state: { email } });
+            // Use signup directly since backend now auto-verifies
+            await signup(email, password, selectedAvatar);
+            showToast('Account created successfully! Welcome to AnonBoard.');
+            navigate('/'); // Redirect to Home (Auto-login)
         } catch (err) {
             const message = err.response?.data?.error?.message || 'Signup failed. Please try again.';
             setError(message);
