@@ -15,21 +15,36 @@ export default function SignupPage() {
     const { showToast } = useToast();
     const navigate = useNavigate();
 
-    const validatePassword = (pwd) => {
-        // Strict password validation
-        const hasLower = /[a-z]/.test(pwd);
-        const hasUpper = /[A-Z]/.test(pwd);
-        const hasNumber = /[0-9]/.test(pwd);
-        const hasSpecial = /[@#$%^&+=!]/.test(pwd); // Common special chars
-        const isLongEnough = pwd.length >= 8;
+    const [passwordValidations, setPasswordValidations] = useState({
+        length: false,
+        lower: false,
+        upper: false,
+        number: false,
+        special: false
+    });
+    const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
-        if (!isLongEnough) return "Password must be at least 8 characters.";
-        if (!hasLower) return "Password must contain a lowercase letter.";
-        if (!hasUpper) return "Password must contain an uppercase letter.";
-        if (!hasNumber) return "Password must contain a number.";
-        if (!hasSpecial) return "Password must contain a special character (@#$%^&+=!).";
-        return null;
-    }
+    const updatePassword = (val) => {
+        setPassword(val);
+        setPasswordValidations({
+            length: val.length >= 8,
+            lower: /[a-z]/.test(val),
+            upper: /[A-Z]/.test(val),
+            number: /[0-9]/.test(val),
+            special: /[@#$%^&+=!]/.test(val)
+        });
+    };
+
+    const validatePassword = (pwd) => {
+        const checks = {
+            length: pwd.length >= 8,
+            lower: /[a-z]/.test(pwd),
+            upper: /[A-Z]/.test(pwd),
+            number: /[0-9]/.test(pwd),
+            special: /[@#$%^&+=!]/.test(pwd)
+        };
+        return Object.values(checks).every(Boolean) ? null : "Password does not meet requirements.";
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,10 +66,8 @@ export default function SignupPage() {
         setLoading(true);
 
         try {
-            // Register creates user (unverified) and sends OTP
             await register(email, password, selectedAvatar);
             showToast('Verification code sent to your email!');
-            // Redirect to verify page with email in state
             navigate('/verify-email', { state: { email } });
         } catch (err) {
             const message = err.response?.data?.error?.message || 'Signup failed. Please try again.';
@@ -141,10 +154,42 @@ export default function SignupPage() {
                             type="password"
                             className="form-input"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Minimum 6 characters"
+                            onChange={(e) => updatePassword(e.target.value)}
+                            onFocus={() => setIsPasswordFocused(true)}
+                            onBlur={() => setIsPasswordFocused(false)} // Or keep checks visible if improved validation UX desired
+                            placeholder="Create a strong password"
+                            style={{
+                                borderColor: isPasswordFocused
+                                    ? Object.values(passwordValidations).every(Boolean) ? '#10B981' : 'var(--accent)'
+                                    : 'var(--border)'
+                            }}
                             required
                         />
+                        {/* Real-time Validation Checks */}
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 1fr',
+                            gap: '8px',
+                            marginTop: '8px',
+                            fontSize: '0.8rem',
+                            color: 'var(--text-secondary)'
+                        }}>
+                            <div style={{ color: passwordValidations.length ? '#10B981' : 'inherit' }}>
+                                {passwordValidations.length ? '✓' : '○'} 8+ Characters
+                            </div>
+                            <div style={{ color: passwordValidations.upper ? '#10B981' : 'inherit' }}>
+                                {passwordValidations.upper ? '✓' : '○'} Uppercase
+                            </div>
+                            <div style={{ color: passwordValidations.lower ? '#10B981' : 'inherit' }}>
+                                {passwordValidations.lower ? '✓' : '○'} Lowercase
+                            </div>
+                            <div style={{ color: passwordValidations.number ? '#10B981' : 'inherit' }}>
+                                {passwordValidations.number ? '✓' : '○'} Number
+                            </div>
+                            <div style={{ color: passwordValidations.special ? '#10B981' : 'inherit' }}>
+                                {passwordValidations.special ? '✓' : '○'} Special Chars
+                            </div>
+                        </div>
                     </div>
 
                     <div className="form-group">
@@ -154,9 +199,23 @@ export default function SignupPage() {
                             className="form-input"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            placeholder="••••••••"
+                            placeholder="Repeat password"
+                            style={{
+                                borderColor: confirmPassword && password !== confirmPassword ? '#EF4444' :
+                                    confirmPassword && password === confirmPassword ? '#10B981' : 'var(--border)'
+                            }}
                             required
                         />
+                        {confirmPassword && password !== confirmPassword && (
+                            <div style={{ color: '#EF4444', fontSize: '0.8rem', marginTop: '4px' }}>
+                                ⚠ Passwords do not match
+                            </div>
+                        )}
+                        {confirmPassword && password === confirmPassword && (
+                            <div style={{ color: '#10B981', fontSize: '0.8rem', marginTop: '4px' }}>
+                                ✓ Passwords match
+                            </div>
+                        )}
                     </div>
 
                     <button type="submit" className="btn btn-primary" style={{ width: '100%' }} disabled={loading}>
