@@ -5,6 +5,9 @@ import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import VerifyEmailPage from './pages/VerifyEmailPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 import FeedPage from './pages/FeedPage';
 import CreatePostPage from './pages/CreatePostPage';
 import PostDetailPage from './pages/PostDetailPage';
@@ -75,6 +78,9 @@ function AppRoutes() {
         <Route path="/" element={<PublicRoute><LandingPage /></PublicRoute>} />
         <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
         <Route path="/signup" element={<PublicRoute><SignupPage /></PublicRoute>} />
+        <Route path="/verify-email" element={<PublicRoute><VerifyEmailPage /></PublicRoute>} />
+        <Route path="/forgot-password" element={<PublicRoute><ForgotPasswordPage /></PublicRoute>} />
+        <Route path="/reset-password" element={<PublicRoute><ResetPasswordPage /></PublicRoute>} />
         <Route path="/feed" element={<ProtectedRoute><FeedPage /></ProtectedRoute>} />
         <Route path="/trending" element={<ProtectedRoute><TrendingPage /></ProtectedRoute>} />
         <Route path="/my-posts" element={<ProtectedRoute><MyPostsPage /></ProtectedRoute>} />

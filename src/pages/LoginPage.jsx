@@ -62,6 +62,24 @@ export default function LoginPage() {
                     }}>
                         {error.includes('banned') && <div style={{ fontWeight: '600', marginBottom: '4px' }}>🚫 Account Banned</div>}
                         {error}
+                        {error.includes('verified') && (
+                            <div style={{ marginTop: '8px' }}>
+                                <button
+                                    onClick={() => navigate('/verify-email', { state: { email } })}
+                                    style={{
+                                        background: 'transparent',
+                                        border: '1px solid var(--accent)',
+                                        color: 'var(--accent)',
+                                        padding: '4px 8px',
+                                        borderRadius: '4px',
+                                        cursor: 'pointer',
+                                        fontSize: '0.9rem'
+                                    }}
+                                >
+                                    Verify Email Now
+                                </button>
+                            </div>
+                        )}
                     </div>
                 )}
 
@@ -78,7 +96,7 @@ export default function LoginPage() {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="form-group" style={{ marginBottom: '8px' }}>
                         <label className="form-label">Password</label>
                         <input
                             type="password"
@@ -88,6 +106,12 @@ export default function LoginPage() {
                             placeholder="••••••••"
                             required
                         />
+                    </div>
+
+                    <div style={{ textAlign: 'right', marginBottom: '16px' }}>
+                        <Link to="/forgot-password" style={{ fontSize: '0.85rem', color: 'var(--accent)' }}>
+                            Forgot Password?
+                        </Link>
                     </div>
 
                     <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '8px' }} disabled={loading}>

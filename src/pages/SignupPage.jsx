@@ -11,9 +11,25 @@ export default function SignupPage() {
     const [selectedAvatar, setSelectedAvatar] = useState('avatar_01');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { signup } = useAuth();
+    const { register } = useAuth(); // Use register instead of signup (which auto-logins)
     const { showToast } = useToast();
     const navigate = useNavigate();
+
+    const validatePassword = (pwd) => {
+        // Strict password validation
+        const hasLower = /[a-z]/.test(pwd);
+        const hasUpper = /[A-Z]/.test(pwd);
+        const hasNumber = /[0-9]/.test(pwd);
+        const hasSpecial = /[@#$%^&+=!]/.test(pwd); // Common special chars
+        const isLongEnough = pwd.length >= 8;
+
+        if (!isLongEnough) return "Password must be at least 8 characters.";
+        if (!hasLower) return "Password must contain a lowercase letter.";
+        if (!hasUpper) return "Password must contain an uppercase letter.";
+        if (!hasNumber) return "Password must contain a number.";
+        if (!hasSpecial) return "Password must contain a special character (@#$%^&+=!).";
+        return null;
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,18 +41,21 @@ export default function SignupPage() {
             return;
         }
 
-        if (password.length < 6) {
-            setError('Password must be at least 6 characters');
-            showToast('Password too short', 'error');
+        const pwdError = validatePassword(password);
+        if (pwdError) {
+            setError(pwdError);
+            showToast(pwdError, 'error');
             return;
         }
 
         setLoading(true);
 
         try {
-            await signup(email, password, selectedAvatar);
-            showToast('Account created! Welcome to AnonBoard.');
-            navigate('/feed');
+            // Register creates user (unverified) and sends OTP
+            await register(email, password, selectedAvatar);
+            showToast('Verification code sent to your email!');
+            // Redirect to verify page with email in state
+            navigate('/verify-email', { state: { email } });
         } catch (err) {
             const message = err.response?.data?.error?.message || 'Signup failed. Please try again.';
             setError(message);

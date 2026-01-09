@@ -64,12 +64,23 @@ export function AuthProvider({ children }) {
   };
 
   const signup = async (email, password, avatar) => {
+    // This method performs auto-login, which we might want to change dynamically 
+    // but for now we keep it for backward compatibility if needed, 
+    // though our new flow uses 'register' below.
     const response = await api.post('/auth/signup', { email, password, avatar });
     const { token } = response.data.data;
     localStorage.setItem('token', token);
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     await fetchUser();
     return response.data;
+  };
+
+  const register = async (email, password, avatar) => {
+    return api.post('/auth/signup', { email, password, avatar });
+  };
+
+  const verifyEmail = async (email, otp) => {
+    return api.post('/auth/verify-email', { email, otp });
   };
 
   const logout = () => {
@@ -86,7 +97,7 @@ export function AuthProvider({ children }) {
   const isPremium = user?.isPremium || user?.userType === 'PREMIUM';
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, signup, logout, refreshUser, isAdmin, isPremium }}>
+    <AuthContext.Provider value={{ user, loading, login, signup, register, verifyEmail, logout, refreshUser, isAdmin, isPremium }}>
       {children}
     </AuthContext.Provider>
   );
