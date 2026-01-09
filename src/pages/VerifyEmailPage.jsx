@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import api from '../services/api';
 import { useToast } from '../components/Toast';
 
 export default function VerifyEmailPage() {
@@ -21,6 +22,15 @@ export default function VerifyEmailPage() {
             navigate('/login');
         }
     }, [location, navigate]);
+
+    const handleResend = async () => {
+        try {
+            await api.post('/auth/resend-otp', { email });
+            showToast('Code sent again!', 'success');
+        } catch (err) {
+            showToast('Failed to resend code', 'error');
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -71,6 +81,23 @@ export default function VerifyEmailPage() {
                         {loading ? 'Verifying...' : 'Verify Email'}
                     </button>
                 </form>
+
+                <p style={{ textAlign: 'center', marginTop: '16px', fontSize: '0.9rem' }}>
+                    Didn't receive code?{' '}
+                    <button
+                        type="button"
+                        onClick={handleResend}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            color: 'var(--accent)',
+                            cursor: 'pointer',
+                            textDecoration: 'underline'
+                        }}
+                    >
+                        Resend Code
+                    </button>
+                </p>
 
                 <p style={{ textAlign: 'center', marginTop: '24px' }}>
                     <Link to="/login" style={{ color: 'var(--text-secondary)' }}>Back to Login</Link>
