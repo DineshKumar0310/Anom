@@ -81,21 +81,23 @@ export default function FeedPage() {
         <div className="main-content">
             {/* Search Bar */}
             <form onSubmit={handleSearch} style={{ marginBottom: '20px' }}>
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                     <input
                         type="text"
                         className="form-input"
-                        placeholder="🔍 Search posts by title, content, or tags..."
+                        placeholder="🔍 Search posts..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        style={{ flex: 1 }}
+                        style={{ flex: '1 1 200px', minWidth: '0' }}
                     />
-                    <button type="submit" className="btn btn-primary">Search</button>
-                    {query && (
-                        <button type="button" className="btn btn-secondary" onClick={clearSearch}>
-                            Clear
-                        </button>
-                    )}
+                    <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+                        <button type="submit" className="btn btn-primary">Search</button>
+                        {query && (
+                            <button type="button" className="btn btn-secondary" onClick={clearSearch}>
+                                Clear
+                            </button>
+                        )}
+                    </div>
                 </div>
             </form>
 

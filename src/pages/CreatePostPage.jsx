@@ -246,11 +246,11 @@ export default function CreatePostPage() {
                         )}
                     </div>
 
-                    <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-                        <button type="button" className="btn btn-secondary" onClick={() => navigate('/feed')}>
+                    <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+                        <button type="button" className="btn btn-secondary" onClick={() => navigate('/feed')} style={{ flex: '1 1 auto', minWidth: '120px' }}>
                             Cancel
                         </button>
-                        <button type="submit" className="btn btn-primary" disabled={loading || !canPost}>
+                        <button type="submit" className="btn btn-primary" disabled={loading || !canPost} style={{ flex: '1 1 auto', minWidth: '150px' }}>
                             {loading ? 'Posting...' : '🎭 Post Anonymously'}
                         </button>
                     </div>

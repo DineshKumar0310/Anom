@@ -209,10 +209,10 @@ export default function AdminPanel() {
 
     return (
         <div className="main-content">
-            <h1 style={{ marginBottom: '20px' }}>⚙️ Admin Dashboard</h1>
+            <h1 style={{ marginBottom: '20px', fontSize: 'clamp(1.3rem, 5vw, 1.5rem)' }}>⚙️ Admin Dashboard</h1>
 
             {/* Stats Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '12px', marginBottom: '24px' }}>
+            <div className="admin-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '12px', marginBottom: '24px' }}>
                 <div className="card" style={{ textAlign: 'center', padding: '12px' }}>
                     <div style={{ fontSize: '1.2rem' }}>👥</div>
                     <div style={{ fontSize: '1.2rem', fontWeight: '700' }}>{stats.totalUsers || 0}</div>
@@ -238,12 +238,12 @@ export default function AdminPanel() {
             </div>
 
             {/* Tabs */}
-            <div className="sort-toggle" style={{ marginBottom: '20px' }}>
+            <div className="sort-toggle" style={{ marginBottom: '20px', flexWrap: 'wrap', gap: '8px' }}>
                 <button className={`sort-btn ${activeTab === 'reports' ? 'active' : ''}`} onClick={() => setActiveTab('reports')}>
                     🚩 Reports
                 </button>
                 <button className={`sort-btn ${activeTab === 'content' ? 'active' : ''}`} onClick={() => setActiveTab('content')}>
-                    📝 Posts & Comments
+                    📝 Posts
                 </button>
                 <button className={`sort-btn ${activeTab === 'users' ? 'active' : ''}`} onClick={() => setActiveTab('users')}>
                     👥 Users

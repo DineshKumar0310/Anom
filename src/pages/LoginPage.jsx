@@ -36,10 +36,17 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="auth-page">
+        <div className="auth-page" style={{
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px',
+            background: 'linear-gradient(135deg, var(--bg-primary) 0%, #1a1a2e 100%)'
+        }}>
             <div className="auth-container">
-                <div className="auth-header">
-                    <Link to="/" className="navbar-logo" style={{ fontSize: '2rem' }}>
+                <div className="auth-header" style={{ marginBottom: '24px', textAlign: 'center' }}>
+                    <Link to="/" className="navbar-logo" style={{ fontSize: '1.8rem', justifyContent: 'center' }}>
                         <span>🎭</span>
                         AnonBoard
                     </Link>

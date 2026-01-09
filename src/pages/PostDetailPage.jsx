@@ -434,12 +434,12 @@ export default function PostDetailPage() {
             </div>
 
             <div className="card" style={{ marginTop: '24px' }}>
-                <h3 style={{ marginBottom: '16px' }}>Add a Comment</h3>
+                <h3 style={{ marginBottom: '16px', fontSize: 'clamp(1rem, 4vw, 1.2rem)' }}>Add a Comment</h3>
                 <form onSubmit={handleSubmitComment}>
                     <textarea className="form-input form-textarea" value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder="What are your thoughts?" style={{ marginBottom: '12px' }} />
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                         <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>⏰ Comments can be edited for 10 minutes</span>
-                        <button type="submit" className="btn btn-primary" disabled={commenting || !newComment.trim()}>{commenting ? 'Posting...' : 'Comment'}</button>
+                        <button type="submit" className="btn btn-primary" disabled={commenting || !newComment.trim()} style={{ flexShrink: 0 }}>{commenting ? 'Posting...' : 'Comment'}</button>
                     </div>
                 </form>
             </div>

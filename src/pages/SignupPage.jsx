@@ -47,95 +47,112 @@ export default function SignupPage() {
     };
 
     return (
-        <div className="auth-container" style={{ maxWidth: '500px' }}>
-            <h1 className="auth-title">🎭 Join AnonBoard</h1>
-            <p className="auth-subtitle">Create an account to discuss anonymously</p>
+        <div className="auth-page" style={{
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px',
+            background: 'linear-gradient(135deg, var(--bg-primary) 0%, #1a1a2e 100%)'
+        }}>
+            <div className="auth-container" style={{ maxWidth: '500px', width: '100%' }}>
+                <div className="auth-header" style={{ marginBottom: '24px', textAlign: 'center' }}>
+                    <Link to="/" className="navbar-logo" style={{ fontSize: '1.8rem', justifyContent: 'center' }}>
+                        <span>🎭</span>
+                        AnonBoard
+                    </Link>
+                </div>
 
-            {error && <div className="error-message">{error}</div>}
+                <h1 className="auth-title">Join AnonBoard</h1>
+                <p className="auth-subtitle">Create an account to discuss anonymously</p>
 
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label className="form-label">Choose Your Avatar</label>
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(5, 1fr)',
-                        gap: '10px',
-                        marginBottom: '16px'
-                    }}>
-                        {AVATARS.map((avatar) => (
-                            <button
-                                key={avatar.id}
-                                type="button"
-                                onClick={() => setSelectedAvatar(avatar.id)}
-                                style={{
-                                    width: '50px',
-                                    height: '50px',
-                                    borderRadius: '50%',
-                                    background: avatar.color,
-                                    border: selectedAvatar === avatar.id ? '3px solid var(--accent)' : '2px solid var(--border)',
-                                    cursor: 'pointer',
-                                    fontSize: '1.5rem',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    transition: 'transform 0.2s, border 0.2s',
-                                    transform: selectedAvatar === avatar.id ? 'scale(1.1)' : 'scale(1)',
-                                }}
-                            >
-                                {avatar.emoji}
-                            </button>
-                        ))}
+                {error && <div className="error-message">{error}</div>}
+
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label className="form-label">Choose Your Avatar</label>
+                        <div className="avatar-grid" style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(5, 1fr)',
+                            gap: '10px',
+                            marginBottom: '16px'
+                        }}>
+                            {AVATARS.map((avatar) => (
+                                <button
+                                    key={avatar.id}
+                                    type="button"
+                                    onClick={() => setSelectedAvatar(avatar.id)}
+                                    style={{
+                                        width: '100%',
+                                        aspectRatio: '1',
+                                        maxWidth: '50px',
+                                        borderRadius: '50%',
+                                        background: avatar.color,
+                                        border: selectedAvatar === avatar.id ? '3px solid var(--accent)' : '2px solid var(--border)',
+                                        cursor: 'pointer',
+                                        fontSize: 'clamp(1rem, 4vw, 1.5rem)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        transition: 'transform 0.2s, border 0.2s',
+                                        transform: selectedAvatar === avatar.id ? 'scale(1.1)' : 'scale(1)',
+                                    }}
+                                >
+                                    {avatar.emoji}
+                                </button>
+                            ))}
+                        </div>
                     </div>
-                </div>
 
-                <div className="form-group">
-                    <label className="form-label">College Email</label>
-                    <input
-                        type="email"
-                        className="form-input"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="your@college.edu"
-                        required
-                    />
-                </div>
+                    <div className="form-group">
+                        <label className="form-label">College Email</label>
+                        <input
+                            type="email"
+                            className="form-input"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="your@college.edu"
+                            required
+                        />
+                    </div>
 
-                <div className="form-group">
-                    <label className="form-label">Password</label>
-                    <input
-                        type="password"
-                        className="form-input"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Minimum 6 characters"
-                        required
-                    />
-                </div>
+                    <div className="form-group">
+                        <label className="form-label">Password</label>
+                        <input
+                            type="password"
+                            className="form-input"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Minimum 6 characters"
+                            required
+                        />
+                    </div>
 
-                <div className="form-group">
-                    <label className="form-label">Confirm Password</label>
-                    <input
-                        type="password"
-                        className="form-input"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        placeholder="••••••••"
-                        required
-                    />
-                </div>
+                    <div className="form-group">
+                        <label className="form-label">Confirm Password</label>
+                        <input
+                            type="password"
+                            className="form-input"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            placeholder="••••••••"
+                            required
+                        />
+                    </div>
 
-                <button type="submit" className="btn btn-primary" style={{ width: '100%' }} disabled={loading}>
-                    {loading ? 'Creating account...' : 'Create Anonymous Account'}
-                </button>
-            </form>
+                    <button type="submit" className="btn btn-primary" style={{ width: '100%' }} disabled={loading}>
+                        {loading ? 'Creating account...' : 'Create Anonymous Account'}
+                    </button>
+                </form>
 
-            <p className="auth-footer">
-                Already have an account? <Link to="/login">Sign in</Link>
-            </p>
+                <p className="auth-footer">
+                    Already have an account? <Link to="/login">Sign in</Link>
+                </p>
 
-            <p style={{ marginTop: '16px', fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'center' }}>
-                🔒 Your real identity will never be shown to other users
-            </p>
+                <p style={{ marginTop: '16px', fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'center' }}>
+                    🔒 Your real identity will never be shown to other users
+                </p>
+            </div>
         </div>
     );
 }
