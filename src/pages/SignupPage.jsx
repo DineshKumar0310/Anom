@@ -11,7 +11,7 @@ export default function SignupPage() {
     const [selectedAvatar, setSelectedAvatar] = useState('avatar_01');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { register } = useAuth(); // Use register instead of signup (which auto-logins)
+    const { signup } = useAuth(); // Use register instead of signup (which auto-logins)
     const { showToast } = useToast();
     const navigate = useNavigate();
 
