@@ -15,6 +15,9 @@ import PremiumPage from './pages/PremiumPage';
 import TrendingPage from './pages/TrendingPage';
 import MyPostsPage from './pages/MyPostsPage';
 import AdminPanel from './pages/AdminPanel';
+import JobPage from './pages/JobPage';
+import JobDetailsPage from './pages/JobDetailsPage';
+import AdminJobsPage from './pages/AdminJobsPage';
 import './index.css';
 
 function ProtectedRoute({ children, adminOnly = false }) {
@@ -87,7 +90,10 @@ function AppRoutes() {
         <Route path="/create" element={<ProtectedRoute><CreatePostPage /></ProtectedRoute>} />
         <Route path="/post/:id" element={<ProtectedRoute><PostDetailPage /></ProtectedRoute>} />
         <Route path="/premium" element={<ProtectedRoute><PremiumPage /></ProtectedRoute>} />
+        <Route path="/jobs" element={<ProtectedRoute><JobPage /></ProtectedRoute>} />
+        <Route path="/jobs/:id" element={<ProtectedRoute><JobDetailsPage /></ProtectedRoute>} />
         <Route path="/admin" element={<ProtectedRoute adminOnly><AdminPanel /></ProtectedRoute>} />
+        <Route path="/admin/jobs" element={<ProtectedRoute adminOnly><AdminJobsPage /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>

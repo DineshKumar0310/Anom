@@ -209,7 +209,10 @@ export default function AdminPanel() {
 
     return (
         <div className="main-content">
-            <h1 style={{ marginBottom: '20px', fontSize: 'clamp(1.3rem, 5vw, 1.5rem)' }}>⚙️ Admin Dashboard</h1>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <h1 style={{ fontSize: 'clamp(1.3rem, 5vw, 1.5rem)', margin: 0 }}>⚙️ Admin Dashboard</h1>
+                <Link to="/admin/jobs" className="btn btn-primary">💼 Manage Jobs</Link>
+            </div>
 
             {/* Stats Grid */}
             <div className="admin-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '12px', marginBottom: '24px' }}>

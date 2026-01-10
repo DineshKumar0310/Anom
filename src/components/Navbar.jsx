@@ -38,6 +38,7 @@ export default function Navbar() {
                     {/* Navigation Links */}
                     <div className={`navbar-nav ${mobileMenuOpen ? 'mobile-open' : ''}`}>
                         <Link to="/feed" className="nav-link" onClick={closeMobileMenu}>Feed</Link>
+                        <Link to="/jobs" className="nav-link" onClick={closeMobileMenu}>💼 Jobs</Link>
                         <Link to="/trending" className="nav-link" onClick={closeMobileMenu}>🔥 Trending</Link>
                         <Link to="/my-posts" className="nav-link" onClick={closeMobileMenu}>📝 My Posts</Link>
                         {isAdmin && <Link to="/admin" className="nav-link" onClick={closeMobileMenu}>⚙️ Admin</Link>}

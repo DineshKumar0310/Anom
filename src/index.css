@@ -1334,3 +1334,503 @@ select {
   font-weight: 600;
   margin-left: 6px;
 }
+
+/* ===== JOBS & INTERNSHIPS PAGE STYLES ===== */
+
+/* Page Header */
+.jobs-page-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.jobs-page-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.jobs-page-header p {
+  color: var(--text-secondary);
+}
+
+/* Filters Container */
+.job-filters-container {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.job-filters-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+}
+
+.job-filters-search-icon {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+.job-filters-search .form-input {
+  background: transparent;
+  border: none;
+  flex: 1;
+}
+
+.job-filters-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.job-filter-tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.job-filter-tab:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.job-filter-tab.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* Jobs List */
+.jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Job Card */
+.job-card {
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.job-card:hover {
+  transform: translateY(-3px);
+}
+
+.job-card-content {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.job-card-logo {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.job-card-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.job-card-logo-fallback {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.job-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.job-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.job-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.job-closing-badge {
+  flex-shrink: 0;
+}
+
+.job-card-company {
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin: 0 0 10px 0;
+  font-size: 0.95rem;
+}
+
+.job-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.job-card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Job Details Page */
+.job-details-page>.btn-ghost {
+  margin-bottom: 16px;
+}
+
+.job-details-card {
+  padding: 24px;
+}
+
+.job-details-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.job-details-logo {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  border-radius: var(--radius-md);
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--accent);
+  overflow: hidden;
+}
+
+.job-details-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.job-details-title-section h1 {
+  font-size: 1.6rem;
+  margin: 0 0 4px 0;
+}
+
+.job-details-company {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.job-details-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.job-details-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+
+.job-details-description h3 {
+  margin-bottom: 12px;
+}
+
+.job-details-description p {
+  white-space: pre-wrap;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.job-details-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.job-details-dates {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.job-details-dates p {
+  margin: 4px 0;
+}
+
+.btn-lg {
+  padding: 14px 32px;
+  font-size: 1.1rem;
+}
+
+/* Job Comments Section */
+.job-comments-section {
+  margin-top: 20px;
+}
+
+.job-comments-section h3 {
+  margin-bottom: 16px;
+}
+
+.job-comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.job-comment-form .btn {
+  align-self: flex-end;
+}
+
+.job-comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.job-comment-item {
+  padding: 12px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+}
+
+.job-comment-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.job-comment-author {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.job-comment-time {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.job-comment-content {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0 0 8px 0;
+}
+
+/* Admin Jobs Page */
+.admin-jobs-page .admin-jobs-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.admin-jobs-header h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.admin-job-form-card h2 {
+  margin-bottom: 20px;
+}
+
+.admin-job-form {
+  display: grid;
+  gap: 16px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-check-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-check-inline label {
+  margin: 0;
+  cursor: pointer;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.admin-jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-job-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-job-item-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.admin-job-item-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+}
+
+.admin-job-item-info p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.admin-job-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.admin-job-item-status {
+  flex-shrink: 0;
+}
+
+.admin-job-item-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Responsive for Jobs */
+@media (max-width: 768px) {
+  .jobs-page-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .job-card-content {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .job-card-logo {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+  }
+
+  .job-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .job-card-footer {
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+  }
+
+  .job-details-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .job-details-logo {
+    margin: 0 auto;
+  }
+
+  .job-details-badges {
+    justify-content: center;
+  }
+
+  .job-details-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .job-details-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-jobs-header {
+    flex-direction: column;
+  }
+
+  .admin-jobs-header h1 {
+    text-align: left;
+    width: 100%;
+  }
+
+  .admin-job-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-job-item-actions {
+    justify-content: flex-end;
+  }
+}
+
+/* Badge variants */
+.badge-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
